@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mini Text Editor</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 30px;
+    }
+
+    #toolbar {
+      margin-bottom: 15px;
+    }
+
+    select, button {
+      margin-right: 10px;
+      padding: 5px 10px;
+      font-size: 14px;
+    }
+
+    button.active {
+      background-color: #007bff;
+      color: white;
+    }
+
+    #editor {
+      border: 1px solid #ccc;
+      padding: 10px;
+      min-height: 150px;
+      font-size: 12px;
+      color: black;
+    }
+  </style>
+</head>
+<body>
+  <h2>Mini Text Editor</h2>
+
+  <div id="toolbar">
+    <label for="fontSizeSelect">Font Size: </label>
+    <select id="fontSizeSelect">
+      <option value="12px" selected>12px</option>
+      <option value="16px">16px</option>
+      <option value="20px">20px</option>
+    </select>
+
+    <label for="fontColorSelect">Font Color: </label>
+    <select id="fontColorSelect">
+      <option value="black" selected>Black</option>
+      <option value="red">Red</option>
+      <option value="blue">Blue</option>
+    </select>
+
+    <button id="boldBtn">Bold</button>
+    <button id="italicBtn">Italic</button>
+    <button id="resetBtn">Reset</button>
+  </div>
+
+  <div id="editor" contenteditable="true">
+    Type something here...
+  </div>
+
+  <script>
+    const editor = document.getElementById('editor');
+    const fontSizeSelect = document.getElementById('fontSizeSelect');
+    const fontColorSelect = document.getElementById('fontColorSelect');
+    const boldBtn = document.getElementById('boldBtn');
+    const italicBtn = document.getElementById('italicBtn');
+    const resetBtn = document.getElementById('resetBtn');
+
+    fontSizeSelect.addEventListener('change', () => {
+      editor.style.fontSize = fontSizeSelect.value;
+    });
+
+    fontColorSelect.addEventListener('change', () => {
+      editor.style.color = fontColorSelect.value;
+    });
+
+    boldBtn.addEventListener('click', () => {
+      boldBtn.classList.toggle('active');
+      editor.style.fontWeight = boldBtn.classList.contains('active') ? 'bold' : 'normal';
+    });
+
+    italicBtn.addEventListener('click', () => {
+      italicBtn.classList.toggle('active');
+      editor.style.fontStyle = italicBtn.classList.contains('active') ? 'italic' : 'normal';
+    });
+
+    resetBtn.addEventListener('click', () => {
+      fontSizeSelect.value = '12px';
+      fontColorSelect.value = 'black';
+      boldBtn.classList.remove('active');
+      italicBtn.classList.remove('active');
+      editor.style.fontSize = '12px';
+      editor.style.color = 'black';
+      editor.style.fontWeight = 'normal';
+      editor.style.fontStyle = 'normal';
+    });
+  </script>
+</body>
+</html>
